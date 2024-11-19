@@ -1,0 +1,40 @@
+# Dependências de pacotes do frontend
+/node_modules/
+/.pnp/
+/.pnp.js
+
+# Build do frontend
+/.next/
+/dist/
+/build/
+
+# Dependências de pacotes do backend (Java/Gradle)
+.gradle/
+/build/
+/out/
+
+# Arquivos de configuração do Gradle
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Arquivos de configuração do Maven (caso esteja utilizando)
+.mvn/
+target/
+
+# Arquivos temporários criados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Arquivos de IDEs (ex: VSCode, IntelliJ, etc.)
+.vscode/
+.idea/
+
+# Arquivos de build temporários
+*.class
+*.jar
+*.war
+*.ear
+

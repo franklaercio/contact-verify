@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./gradlew bootRun",
+    "build": "./gradlew clean build",
+    "dev": "./gradlew bootRun"
+  },
+  "dependencies": {
+    "pnpm": "^6.14.0"
+  }
+}
+
