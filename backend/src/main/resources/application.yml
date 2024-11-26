@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: backend
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/contactsdb
+    username: admin
+    password: 123456
+    jpa:
+      hibernate:
+        ddl-auto: none
+    sql:
+      init:
+        mode: always
