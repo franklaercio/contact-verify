@@ -2,7 +2,7 @@ package br.ufrn.backend.infrastructure.controllers
 
 import br.ufrn.backend.application.usecases.AddContactUseCase
 import br.ufrn.backend.domain.enums.ContactType
-import br.ufrn.backend.shared.dtos.ContactResponse
+import br.ufrn.backend.shared.response.ContactResponse
 import br.ufrn.backend.shared.mappers.toResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

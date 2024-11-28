@@ -5,6 +5,7 @@ import br.ufrn.backend.domain.enums.ContactType
 import br.ufrn.backend.infrastructure.persistence.entities.ContactEntity
 import br.ufrn.backend.infrastructure.persistence.repositories.ContactRepository
 import br.ufrn.backend.shared.mappers.toDomain
+import br.ufrn.backend.shared.utils.ContactUtils
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono
 class AddContactUseCase(private val contactRepository: ContactRepository) {
 
     fun execute(identifier: String, type: ContactType): Mono<Contact> {
-        if (!isValid(identifier, type)) {
+        if (!ContactUtils.isValid(identifier, type)) {
             return Mono.error(IllegalArgumentException("Invalid ${type.name.lowercase()} format"))
         }
 
@@ -28,12 +29,5 @@ class AddContactUseCase(private val contactRepository: ContactRepository) {
                 contactRepository.save(ContactEntity(identifier = identifier, type = type))
             )
             .map { contact -> contact.toDomain() }
-    }
-
-    private fun isValid(identifier: String, type: ContactType): Boolean {
-        return when (type) {
-            ContactType.EMAIL -> identifier.matches(Regex("^[\\w.-]+@[\\w.-]+\\.\\w+$"))
-            ContactType.PHONE -> identifier.matches(Regex("^\\+?\\d+$"))
-        }
     }
 }
