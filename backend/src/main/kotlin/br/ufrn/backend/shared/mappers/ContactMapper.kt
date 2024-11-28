@@ -2,7 +2,7 @@ package br.ufrn.backend.shared.mappers
 
 import br.ufrn.backend.domain.Contact
 import br.ufrn.backend.infrastructure.persistence.entities.ContactEntity
-import br.ufrn.backend.shared.dtos.ContactResponse
+import br.ufrn.backend.shared.response.ContactResponse
 
 fun Contact.toResponse(): ContactResponse {
     return ContactResponse(

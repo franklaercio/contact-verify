@@ -1,4 +1,4 @@
-package br.ufrn.backend.shared.dtos
+package br.ufrn.backend.shared.response
 
 data class ContactResponse(
     val id: Long?,
