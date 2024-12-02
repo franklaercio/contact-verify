@@ -1,6 +1,7 @@
 // components/Header.tsx
 
 import React, { useState } from 'react';
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,6 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-800 py-4 px-6 shadow-md z-50 flex justify-between items-center">
       <div className="flex items-center space-x-4">
-        <img src="/logo.png" alt="Logo" className="h-8" />
         <span className="text-lg font-bold">Consult</span>
       </div>
 
@@ -41,6 +41,7 @@ const Header: React.FC = () => {
       <nav className={`lg:flex ${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
         <ul className={`lg:flex lg:flex-row ${isMenuOpen ? 'flex-col' : 'flex-row'} space-x-8 lg:space-x-8 lg:mt-0 mt-4 lg:text-sm text-lg text-white ${isMenuOpen ? 'items-center justify-center' : ''}`}>
           <li><a href="#consulta" className="hover:underline">Consulta</a></li>
+          <li><a href="#historico" className="hover:underline">Histórico de Consultas</a></li>
           <li><a href="#quem-somos" className="hover:underline">Quem Somos</a></li>
         </ul>
       </nav>
