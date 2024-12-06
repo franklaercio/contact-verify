@@ -27,7 +27,10 @@ class SecurityConfig {
         return http
             .csrf { it.disable() }
             .authorizeExchange { exchanges ->
-                exchanges.pathMatchers("/auth/login", "/auth/signup").permitAll()
+                exchanges.pathMatchers(HttpMethod.GET, "/auth/login").permitAll()
+                exchanges.pathMatchers(HttpMethod.GET, "/auth/signup").permitAll()
+                exchanges.pathMatchers(HttpMethod.GET, "/api/companies/{identifier}").permitAll()
+                exchanges.pathMatchers(HttpMethod.POST, "/api/contacts").permitAll()
                 exchanges.pathMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
                 exchanges.anyExchange().authenticated()
             }
