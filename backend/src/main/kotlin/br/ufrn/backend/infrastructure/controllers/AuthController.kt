@@ -1,8 +1,8 @@
 package br.ufrn.backend.infrastructure.controllers
 
 import br.ufrn.backend.application.usecases.UserUseCase
+import br.ufrn.backend.domain.User
 import br.ufrn.backend.infrastructure.security.JwtTokenProvider
-import com.carcara.software.fintracker.domain.model.User
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.ReactiveAuthenticationManager

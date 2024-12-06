@@ -1,9 +1,9 @@
 package br.ufrn.backend.infrastructure.persistence.users
 
+import br.ufrn.backend.domain.User
 import br.ufrn.backend.domain.enums.RoleEnum
 import br.ufrn.backend.domain.repositories.UserRepository
 import br.ufrn.backend.infrastructure.persistence.roles.RoleReactiveRepository
-import com.carcara.software.fintracker.domain.model.User
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -34,11 +34,7 @@ class UserPersistence(
                     savedUser.balance,
                     savedUser.email,
                     savedUser.secret,
-                    savedUser.role.let { RoleEnum.valueOf(it!!.name) },
-                    savedUser.accountNonExpired,
-                    savedUser.accountNonLocked,
-                    savedUser.credentialsNonExpired,
-                    savedUser.enabled
+                    savedUser.role.let { RoleEnum.valueOf(it!!.name) }
                 )
             }
     }
@@ -53,11 +49,7 @@ class UserPersistence(
                         user.balance,
                         user.email,
                         user.secret,
-                        user.role.let { RoleEnum.valueOf(it!!.name) },
-                        user.accountNonExpired,
-                        user.accountNonLocked,
-                        user.credentialsNonExpired,
-                        user.enabled
+                        user.role.let { RoleEnum.valueOf(it!!.name) }
                     )
                 }
             }
@@ -73,11 +65,7 @@ class UserPersistence(
                         user.balance,
                         user.email,
                         user.secret,
-                        user.role.let { RoleEnum.valueOf(it!!.name) },
-                        user.accountNonExpired,
-                        user.accountNonLocked,
-                        user.credentialsNonExpired,
-                        user.enabled
+                        user.role.let { RoleEnum.valueOf(it!!.name) }
                     )
                 }
             }.doOnError { error ->

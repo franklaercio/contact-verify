@@ -1,15 +1,11 @@
-package com.carcara.software.fintracker.domain.model
+package br.ufrn.backend.domain
 
-import com.carcara.software.fintracker.domain.enums.RoleEnum
+import br.ufrn.backend.domain.enums.RoleEnum
 
-class User(
+data class User(
     val name: String,
     val balance: Double,
     val email: String,
     val password: String,
-    val roleEnum: RoleEnum? = RoleEnum.USER,
-    val accountNonExpired: Boolean? = true,
-    val accountNonLocked: Boolean? = true,
-    val credentialsNonExpired: Boolean? = true,
-    val enabled: Boolean? = true
+    val roleEnum: RoleEnum? = RoleEnum.USER
 )

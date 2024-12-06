@@ -6,7 +6,6 @@ import br.ufrn.backend.shared.response.ContactResponse
 
 fun Contact.toResponse(): ContactResponse {
     return ContactResponse(
-        id = this.id,
         identifier = this.identifier,
         type = this.type.name,
         messageCount = this.messageCount,
@@ -16,7 +15,6 @@ fun Contact.toResponse(): ContactResponse {
 
 fun ContactEntity.toDomain(): Contact {
     return Contact(
-        id = this.id,
         identifier = this.identifier,
         type = this.type,
         messageCount = this.messageCount,
@@ -26,7 +24,6 @@ fun ContactEntity.toDomain(): Contact {
 
 fun Contact.toEntity(): ContactEntity {
     return ContactEntity(
-        id = this.id,
         identifier = this.identifier,
         type = this.type,
         messageCount = this.messageCount,

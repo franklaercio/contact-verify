@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("contacts")
 data class ContactEntity(
     @Id
-    val id: Long? = null,
+    val id: String? = null,
     val identifier: String,
     val type: ContactType,
     val messageCount: Int = 0,

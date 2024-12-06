@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table("companies")
 data class CompanyEntity(
-    @Id val id: Long? = null,
+    @Id val id: String? = null,
     val name: String,
     val cnpj: String,
     val number: String,

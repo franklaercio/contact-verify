@@ -1,6 +1,6 @@
 package br.ufrn.backend.domain.repositories
 
-import com.carcara.software.fintracker.domain.model.User
+import br.ufrn.backend.domain.User
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 

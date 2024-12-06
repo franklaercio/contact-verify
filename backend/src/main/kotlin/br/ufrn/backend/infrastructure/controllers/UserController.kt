@@ -1,7 +1,7 @@
 package br.ufrn.backend.infrastructure.controllers
 
 import br.ufrn.backend.application.usecases.UserUseCase
-import com.carcara.software.fintracker.domain.model.User
+import br.ufrn.backend.domain.User
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 

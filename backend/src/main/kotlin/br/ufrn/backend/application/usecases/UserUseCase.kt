@@ -1,8 +1,8 @@
 package br.ufrn.backend.application.usecases
 
 import br.ufrn.backend.application.exceptions.UserNotFoundException
+import br.ufrn.backend.domain.User
 import br.ufrn.backend.domain.repositories.UserRepository
-import com.carcara.software.fintracker.domain.model.User
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -13,6 +13,7 @@ class UserUseCase(private val userRepository: UserRepository) {
     }
 
     fun getUserById(id: String): Mono<User?> {
-        return userRepository.findById(id).switchIfEmpty(Mono.error(UserNotFoundException("User not found")))
+        return userRepository.findById(id)
+            .switchIfEmpty(Mono.error(UserNotFoundException("User not found")))
     }
 }
