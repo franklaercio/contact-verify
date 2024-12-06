@@ -1,4 +1,4 @@
-package br.ufrn.backend.infrastructure.persistence.entities
+package br.ufrn.backend.infrastructure.persistence.companies
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table

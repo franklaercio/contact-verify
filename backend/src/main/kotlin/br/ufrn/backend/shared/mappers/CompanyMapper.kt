@@ -1,7 +1,7 @@
 package br.ufrn.backend.shared.mappers
 
 import br.ufrn.backend.domain.Company
-import br.ufrn.backend.infrastructure.persistence.entities.CompanyEntity
+import br.ufrn.backend.infrastructure.persistence.companies.CompanyEntity
 import br.ufrn.backend.shared.response.CompanyResponse
 
 fun Company.toEntity() = Company(

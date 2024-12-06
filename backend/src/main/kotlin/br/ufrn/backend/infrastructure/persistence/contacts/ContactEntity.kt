@@ -1,4 +1,4 @@
-package br.ufrn.backend.infrastructure.persistence.entities
+package br.ufrn.backend.infrastructure.persistence.contacts
 
 import br.ufrn.backend.domain.enums.ContactType
 import org.springframework.data.annotation.Id
