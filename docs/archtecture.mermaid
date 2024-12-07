@@ -1,0 +1,12 @@
+flowchart TB
+    Client[[Client: Next.js]] --> |Envia Requisições| Nginx[NGINX: Load Balancer]
+    Nginx --> Backend1[Backend: Kotlin Instance 1]
+    Nginx --> Backend2[Backend: Kotlin Instance 2]
+    Backend1 --> |Consulta| Database[PostgreSQL Database]
+    Backend2 --> |Consulta| Database
+
+    style Client fill:#9f9,stroke:#333,stroke-width:2px
+    style Nginx fill:#9ff,stroke:#333,stroke-width:2px
+    style Backend1 fill:#f9f,stroke:#333,stroke-width:2px
+    style Backend2 fill:#f9f,stroke:#333,stroke-width:2px
+    style Database fill:#bbf,stroke:#333,stroke-width:2px

@@ -4,6 +4,10 @@ This project is the final assignment for the **Web Development 1** master's cour
 
 The application uses a **monorepo** structure integrating both frontend and backend and supports local execution or Docker-based deployment.
 
+**Archtecture Diagram**
+
+![Achtecture Diagram](./docs/archtecture.png)
+
 ## Technologies Used
 
 - **Frontend**:
