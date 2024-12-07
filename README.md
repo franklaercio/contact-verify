@@ -46,8 +46,7 @@ Before starting, make sure you have the following tools installed:
 ```plaintext
 monorepo/
 ├── frontend/    # Frontend code using Next.js
-├── backend/     # Backend code using Kotlin + Spring WebFlux
-└── docker/      # Docker and Docker Compose configurations
+└── backend/     # Backend code using Kotlin + Spring WebFlux
 ```
 
 ## How to Run
@@ -98,11 +97,20 @@ To stop and remove the containers, run:
 docker-compose down
 ```
 
+#### Step 2: Build with pnpm
+
+In the root directory of the project, run:
+
+```bash
+pnpm containers
+```
+
 ## Useful Scripts
 
 - **Install Dependencies**: `pnpm install`
 - **Run Locally**: `pnpm start`
 - **Test Frontend**: `pnpm test`
+- **Run With Docker**: `pnpm containers`
 - **Test Backend**: `./gradlew test` (run in the `backend` directory)
 
 ## Contribution
