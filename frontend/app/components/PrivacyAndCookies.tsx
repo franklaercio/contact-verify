@@ -1,10 +1,13 @@
-import React from "react"; 
+import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <section id="privacy" className="py-16 px-4 border-t border-gray-500 min-h-screen">
+    <section
+      id="privacy"
+      className="py-16 px-4 border-t border-gray-500 min-h-fit"
+    >
       <div className="max-w-7xl mx-auto mt-4">
         <h2 className="text-3xl font-bold text-center mb-8">
           Política de Privacidade e Cookies
@@ -12,29 +15,47 @@ const PrivacyPolicy: React.FC = () => {
 
         <Tabs>
           <TabList className="flex flex-wrap justify-center sm:flex-row sm:space-x-6 mb-8">
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Introdução</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Coleta de Dados</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Uso de Dados</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Compartilhamento de Dados</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Segurança</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Cookies</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Seus Direitos</Tab>
-            <Tab className="text-lg font-semibold cursor-pointer hover:text-blue-600 w-full sm:w-auto text-center">Alterações</Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Introdução
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Coleta de Dados
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Uso de Dados
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Compartilhamento de Dados
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Segurança
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Cookies
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Seus Direitos
+            </Tab>
+            <Tab className="text-lg font-semibold cursor-pointer hover:text-gray-400 w-full sm:w-auto text-center">
+              Alterações
+            </Tab>
           </TabList>
 
           <div className="space-y-8">
             <TabPanel>
               <h3 className="text-2xl font-semibold mb-4">Introdução</h3>
               <p className="text-lg leading-relaxed">
-                Bem-vindo ao Contact Trust™. Sua privacidade é uma prioridade para
-                nós. Este documento descreve como tratamos suas informações
+                Bem-vindo ao Contact Trust™. Sua privacidade é uma prioridade
+                para nós. Este documento descreve como tratamos suas informações
                 pessoais e como usamos cookies para oferecer uma experiência
                 personalizada e eficiente.
               </p>
             </TabPanel>
 
             <TabPanel>
-              <h3 className="text-2xl font-semibold mb-4">1. Coleta de Dados</h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                1. Coleta de Dados
+              </h3>
               <p className="text-lg leading-relaxed">
                 Coletamos informações para garantir a qualidade de nossos
                 serviços:
@@ -68,7 +89,9 @@ const PrivacyPolicy: React.FC = () => {
             </TabPanel>
 
             <TabPanel>
-              <h3 className="text-2xl font-semibold mb-4">3. Compartilhamento de Dados</h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                3. Compartilhamento de Dados
+              </h3>
               <p className="text-lg leading-relaxed">
                 Respeitamos sua privacidade e não compartilhamos informações
                 pessoais, exceto:
@@ -79,16 +102,20 @@ const PrivacyPolicy: React.FC = () => {
                   processadores de pagamento).
                 </li>
                 <li>
-                  Quando exigido por lei ou para proteger nossos direitos legais.
+                  Quando exigido por lei ou para proteger nossos direitos
+                  legais.
                 </li>
                 <li>
-                  Com provedores de serviços que suportam nosso site e operações.
+                  Com provedores de serviços que suportam nosso site e
+                  operações.
                 </li>
               </ul>
             </TabPanel>
 
             <TabPanel>
-              <h3 className="text-2xl font-semibold mb-4">4. Segurança dos Dados</h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                4. Segurança dos Dados
+              </h3>
               <p className="text-lg leading-relaxed">
                 Implementamos práticas robustas para proteger suas informações
                 contra acessos não autorizados, uso indevido ou divulgação
@@ -107,8 +134,8 @@ const PrivacyPolicy: React.FC = () => {
                   funcionamento básico do site.
                 </li>
                 <li>
-                  <strong>Cookies analíticos:</strong> Para entender como você usa
-                  o site e melhorar nossos serviços.
+                  <strong>Cookies analíticos:</strong> Para entender como você
+                  usa o site e melhorar nossos serviços.
                 </li>
                 <li>
                   <strong>Cookies de marketing:</strong> Para exibir anúncios
@@ -134,7 +161,9 @@ const PrivacyPolicy: React.FC = () => {
             </TabPanel>
 
             <TabPanel>
-              <h3 className="text-2xl font-semibold mb-4">7. Alterações na Política</h3>
+              <h3 className="text-2xl font-semibold mb-4">
+                7. Alterações na Política
+              </h3>
               <p className="text-lg leading-relaxed">
                 Esta política pode ser atualizada periodicamente para refletir
                 mudanças em regulamentos ou nossas práticas. A data da última

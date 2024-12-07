@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -10,49 +10,155 @@ import Steps from "./components/Steps";
 import History from "./components/History";
 import About from "./components/About";
 import PrivacyAndCookies from "./components/PrivacyAndCookies";
+import axios from "axios";
 
 type ResultType = boolean | null;
+interface Contact {
+  name: string;
+  detail: string;
+}
 
 const Home: React.FC = () => {
   const [searching, setSearching] = useState<boolean>(false);
   const [result, setResult] = useState<ResultType>(null);
+  const [identifier, setIdentifier] = useState("");
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const resultSectionRef = useRef<HTMLDivElement | null>(null);
-
+  const [safeContacts, setSafeContacts] = useState<Contact[]>([]);
+  const [unsafeContacts, setUnsafeContacts] = useState<Contact[]>([]);
   const [resetKey, setResetKey] = useState(0);
 
-  const safeContacts = [
-    { name: "João Silva", detail: "(11) 98765-4321 - São Paulo, SP" },
-    { name: "Maria Oliveira", detail: "(21) 91234-5678 - Rio de Janeiro, RJ" },
-    { name: "Carlos Santos", detail: "(31) 99876-5432 - Belo Horizonte, MG" },
-    { name: "Ana Pereira", detail: "(41) 91234-8765 - Curitiba, PR" },
-    { name: "Paulo Costa", detail: "(51) 93210-9876 - Porto Alegre, RS" },
-  ];
+  const fraudNames = ["Fraude 123", "Golpe 456", "Spam 789", "Falso 000"];
 
-  const unsafeContacts = [
-    { name: "Fraude 123", detail: "(11) 12345-6789 - Local desconhecido" },
-    { name: "Golpista XYZ", detail: "(21) 98765-4321 - Local desconhecido" },
-    {
-      name: "Falso Atendimento",
-      detail: "(31) 99876-5432 - Local desconhecido",
-    },
-    { name: "Spam ABC", detail: "(41) 91234-5678 - Local desconhecido" },
-    { name: "Desconhecido", detail: "(51) 98765-4321 - Local desconhecido" },
-  ];
+  const fetchSafeContacts = async () => {
+    try {
+      setError(null);
+      const response = await axios.get(
+        "http://localhost:8080/api/contacts/security?securityType=SAFE"
+      );
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    setResetKey((prev) => prev + 1);
+      const parsedContacts = response.data.map(
+        (item: { name: string; identifier: string }) => ({
+          name: item.name,
+          detail: item.identifier,
+        })
+      );
 
+      setSafeContacts(parsedContacts);
+    } catch (err) {
+      setError("Failed to fetch safe contacts.");
+      console.error(err);
+    }
+  };
+
+  const fetchUnsafeContacts = async () => {
+    try {
+      setError(null);
+      const response = await axios.get(
+        "http://localhost:8080/api/contacts/security?securityType=UNSAFE"
+      );
+
+      const parsedContacts = response.data.map(
+        (item: { identifier: string }) => ({
+          name: fraudNames[Math.floor(Math.random() * fraudNames.length)],
+          detail: item.identifier,
+        })
+      );
+
+      setUnsafeContacts(parsedContacts);
+    } catch (err) {
+      setError("Failed to fetch safe contacts.");
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSafeContacts();
+    fetchUnsafeContacts();
+  }, []);
+
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setResetKey((prev) => prev + 1);
     resultSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-
     setSearching(true);
     setResult(null);
 
-    setTimeout(() => {
-      setResult(Math.random() > 0.5);
-      setSearching(false);
+    setTimeout(async () => {
+      try {
+        await createContact();
+        const res = await fetchCompany();
+
+        if (res == 200) {
+          setResult(true);
+          setSearching(false);
+        } else {
+          setResult(false);
+          setSearching(false);
+        }
+      } catch (error) {
+        console.error("Error during search:", error);
+        setResult(false);
+      } finally {
+        setSearching(false);
+      }
     }, 8000);
+  };
+
+  const isPhoneNumber = (input: string): boolean => {
+    return /^[\d\s()+-]+$/.test(input);
+  };
+
+  const isEmail = (input: string): boolean => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+  };
+
+  const sanitizePhoneNumber = (phone: string): string => {
+    return phone.replace(/[^0-9]/g, "");
+  };
+
+  const sanitizeEmail = (email: string): string => {
+    return email.replace(/[^a-zA-Z0-9@._-]/g, "");
+  };
+
+  const detectAndSanitize = (input: string): string => {
+    if (isPhoneNumber(input)) {
+      return sanitizePhoneNumber(input);
+    }
+    if (isEmail(input)) {
+      return sanitizeEmail(input);
+    }
+    return "";
+  };
+
+  const fetchCompany = async () => {
+    try {
+      setError(null);
+      const response = await axios.get(
+        `http://localhost:8080/api/companies/${detectAndSanitize(identifier)}`
+      );
+      return response.status;
+    } catch {
+      setError("Company not found or an error occurred.");
+      console.log(error);
+    }
+  };
+
+  const createContact = async () => {
+    try {
+      setError(null);
+      const res = await axios.post("http://localhost:8080/api/contacts", null, {
+        params: {
+          identifier: detectAndSanitize(identifier),
+        },
+        headers: { "Content-Type": "application/json" },
+      });
+      setResponse(res.data);
+    } catch {
+      setError("Failed to add contact. Please try again.");
+    }
   };
 
   return (
@@ -88,6 +194,7 @@ const Home: React.FC = () => {
                   type="text"
                   placeholder="Telefone ou e-mail"
                   className="bg-inherit px-4 py-2 w-full focus:outline-none"
+                  onChange={(e) => setIdentifier(e.target.value)}
                 />
               </div>
               <button
@@ -116,7 +223,7 @@ const Home: React.FC = () => {
       <section
         ref={resultSectionRef}
         //id="search"
-        className="min-h-screen py-16 px-4 flex flex-col items-center justify-center"
+        className="min-h-screen py-16 px-4 flex flex-col items-center justify-center border-t border-gray-500"
       >
         <h1 className="align-baseline text-3xl mb-20 sm:text-4xl font-bold leading-tight">
           Estamos Cuidando com Segurança de{" "}
@@ -138,30 +245,30 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
           </div>
-        ) : result !== null ? (
+        ) : result !== null && !searching ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Passos Finais */}
             <Steps key={resetKey} />
 
             <motion.div
               className={`flex flex-col items-center justify-center rounded-lg shadow-lg p-2 ${
-                result ? "bg-green-600" : "bg-red-800"
+                result && response ? "bg-green-600" : "bg-red-800"
               }`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
               <div className="flex flex-col items-center justify-center w-3/6 h-3/6">
-                {result ? (
+                {result && response ? (
                   <img src="safe.gif" alt="Contato Seguro" />
                 ) : (
                   <img src="unsafe.gif" alt="Contato Inseguro" />
                 )}
                 <h2 className={`text-white text-2xl font-bold`}>
-                  {result ? "Contato Seguro" : "Contato Não Seguro"}
+                  {result && response ? "Contato Seguro" : "Contato Não Seguro"}
                 </h2>
                 <p className="mt-2 text-white text-center">
-                  {result
+                  {result && response
                     ? "Este contato passou em todas as verificações e é confiável."
                     : "Este contato falhou em algumas verificações. Recomendamos cautela."}
                 </p>
