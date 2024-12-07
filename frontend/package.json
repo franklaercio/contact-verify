@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "containers": "docker compose down && docker-compose up"
   },
   "dependencies": {
     "@next/font": "^14.2.15",

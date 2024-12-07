@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pnpm run --parallel -r start"
+    "start": "pnpm run --parallel -r start",
+    "containers": "pnpm run --parallel -r containers"
   }
 }

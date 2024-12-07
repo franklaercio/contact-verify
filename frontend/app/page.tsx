@@ -31,11 +31,13 @@ const Home: React.FC = () => {
 
   const fraudNames = ["Fraude 123", "Golpe 456", "Spam 789", "Falso 000"];
 
+  const BACKEND_URL = `${process.env.NEXT_PUBLIC_BACKEND_HOST}:${process.env.NEXT_PUBLIC_BACKEND_PORT}`;
+
   const fetchSafeContacts = async () => {
     try {
       setError(null);
       const response = await axios.get(
-        "http://localhost:8080/api/contacts/security?securityType=SAFE"
+        `${BACKEND_URL}/api/contacts/security?securityType=SAFE`
       );
 
       const parsedContacts = response.data.map(
@@ -56,7 +58,7 @@ const Home: React.FC = () => {
     try {
       setError(null);
       const response = await axios.get(
-        "http://localhost:8080/api/contacts/security?securityType=UNSAFE"
+        `${BACKEND_URL}/api/contacts/security?securityType=UNSAFE`
       );
 
       const parsedContacts = response.data.map(
@@ -137,7 +139,7 @@ const Home: React.FC = () => {
     try {
       setError(null);
       const response = await axios.get(
-        `http://localhost:8080/api/companies/${detectAndSanitize(identifier)}`
+        `${BACKEND_URL}/api/companies/${detectAndSanitize(identifier)}`
       );
       return response.status;
     } catch {
@@ -149,7 +151,7 @@ const Home: React.FC = () => {
   const createContact = async () => {
     try {
       setError(null);
-      const res = await axios.post("http://localhost:8080/api/contacts", null, {
+      const res = await axios.post(`${BACKEND_URL}/api/contacts`, null, {
         params: {
           identifier: detectAndSanitize(identifier),
         },
