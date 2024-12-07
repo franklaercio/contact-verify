@@ -1,4 +1,7 @@
 package br.ufrn.backend.infrastructure.persistence.contacts
 
-class SecurityContactEntity {
-}
+data class SecurityContactEntity (
+    val name: String? = null,
+    val identifier: String,
+    val status: String
+)

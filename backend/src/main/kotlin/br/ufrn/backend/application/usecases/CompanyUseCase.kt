@@ -5,6 +5,7 @@ import br.ufrn.backend.domain.Company
 import br.ufrn.backend.domain.repositories.CompanyRepository
 import br.ufrn.backend.shared.utils.ContactUtils
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -17,4 +18,7 @@ class CompanyUseCase(private val repository: CompanyRepository) {
         return repository.findByIdentifier(identifier)
             .switchIfEmpty(Mono.error(CompanyNotFoundException(identifier)))
     }
+
+    fun getAll(): Flux<Company> = repository.getAll()
+
 }

@@ -1,10 +1,12 @@
 package br.ufrn.backend.infrastructure.persistence.contacts
 
 import br.ufrn.backend.domain.Contact
+import br.ufrn.backend.domain.SecurityContact
 import br.ufrn.backend.domain.enums.ContactType
 import br.ufrn.backend.domain.repositories.ContactRepository
 import br.ufrn.backend.shared.mappers.toDomain
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -22,5 +24,10 @@ class ContactPersistence(val contactReactiveRepository: ContactReactiveRepositor
                 contactReactiveRepository.save(ContactEntity(identifier = identifier, type = type))
             )
             .map { contact -> contact.toDomain() }
+    }
+
+    override fun getAllContactsBySecurity(securityType: String): Flux<SecurityContact> {
+        return contactReactiveRepository.findAllSafeAndUnsafe(securityType)
+            .map { it.toDomain() }
     }
 }

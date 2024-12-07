@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
@@ -15,6 +16,15 @@ class CompanyController(private val companyUseCase: CompanyUseCase) {
 
     @GetMapping("/{identifier}")
     fun getCompanyByIdentifier(@PathVariable identifier: String): Mono<CompanyResponse> {
-        return companyUseCase.findByIdentifier(identifier).map { it.toResponse() }
+        return companyUseCase.findByIdentifier(identifier)
+            .map { it.toResponse() }
+            .log()
+    }
+
+    @GetMapping
+    fun getAll(): Flux<CompanyResponse> {
+        return companyUseCase.getAll()
+            .map { it.toResponse() }
+            .log()
     }
 }

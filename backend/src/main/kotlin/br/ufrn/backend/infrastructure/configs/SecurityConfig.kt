@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.reactive.CorsConfigurationSource
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource
 
 
 @Configuration
@@ -30,7 +33,9 @@ class SecurityConfig {
                 exchanges.pathMatchers(HttpMethod.GET, "/auth/login").permitAll()
                 exchanges.pathMatchers(HttpMethod.GET, "/auth/signup").permitAll()
                 exchanges.pathMatchers(HttpMethod.GET, "/api/companies/{identifier}").permitAll()
+                exchanges.pathMatchers(HttpMethod.GET, "/api/companies").permitAll()
                 exchanges.pathMatchers(HttpMethod.POST, "/api/contacts").permitAll()
+                exchanges.pathMatchers(HttpMethod.GET, "/api/contacts/security").permitAll()
                 exchanges.pathMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
                 exchanges.anyExchange().authenticated()
             }
@@ -67,4 +72,17 @@ class SecurityConfig {
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
+
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val config = CorsConfiguration().apply {
+            allowedOrigins = listOf("http://localhost:3000")
+            allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            allowedHeaders = listOf("*")
+            allowCredentials = true
+        }
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", config)
+        return source
+    }
 }

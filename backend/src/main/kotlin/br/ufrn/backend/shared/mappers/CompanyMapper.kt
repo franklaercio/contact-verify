@@ -8,15 +8,19 @@ fun Company.toEntity() = Company(
     name = name,
     number = number,
     cnpj = cnpj,
+    email = email,
 )
 
 fun CompanyEntity.toCompany() = Company(
     name = name,
     number = number,
     cnpj = cnpj,
+    email = email,
 )
 
 fun Company.toResponse() = CompanyResponse(
     name = name,
     cnpj = cnpj,
+    number = number,
+    email = email
 )

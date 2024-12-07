@@ -5,6 +5,7 @@ import br.ufrn.backend.domain.repositories.CompanyRepository
 import br.ufrn.backend.shared.mappers.toCompany
 import br.ufrn.backend.shared.utils.ContactUtils
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -18,4 +19,8 @@ class CompanyPersistence(private val companyReactiveRepository: CompanyReactiveR
 
         return company.map { it.toCompany() }
     }
+
+    override fun getAll(): Flux<Company> =
+        companyReactiveRepository.findAllDistinct()
+            .map { it.toCompany() }
 }

@@ -6,11 +6,13 @@ object ContactUtils {
     private val emailRegex = Regex("^[\\w.-]+@[\\w.-]+\\.\\w+$")
     private val phoneRegex = Regex("^\\+?\\d+$")
 
-    fun isValid(identifier: String, type: ContactType): Boolean =
-        when (type) {
-            ContactType.EMAIL -> isEmail(identifier)
-            ContactType.PHONE -> isPhone(identifier)
+    fun retrieve(identifier: String): ContactType {
+        return if (isEmail(identifier)) {
+            ContactType.EMAIL
+        } else {
+            ContactType.PHONE
         }
+    }
 
     fun isValid(identifier: String): Boolean =
         isEmail(identifier) || isPhone(identifier)
