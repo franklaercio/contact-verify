@@ -19,7 +19,7 @@ const History: React.FC<HistorySectionProps> = ({
       id="history"
       className="min-h-screen py-16 px-4 border-t border-gray-500"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mt-4">
         <h1 className="flex items-center justify-center text-3xl mb-4 sm:text-4xl font-bold leading-tight">
           Principais Contatos Seguros e Inseguros
         </h1>

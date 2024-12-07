@@ -56,7 +56,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" id="search">
       <Header />
 
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
 
       <section
         ref={resultSectionRef}
-        id="search"
+        //id="search"
         className="min-h-screen py-16 px-4 flex flex-col items-center justify-center"
       >
         <h1 className="align-baseline text-3xl mb-20 sm:text-4xl font-bold leading-tight">
